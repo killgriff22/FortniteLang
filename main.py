@@ -1,8 +1,12 @@
 file = open("input.fortnite","r").readlines()
 
 variables = {}
-
-for line in file:
+#in order to add a jump instruction we have to switch from a for loop to a while loop
+#as a for loop abstracts away (hides) the index, even if we use enumerate, the "i" variable
+#is immutable (cannot be changed) 
+program_counter= 0 # the index into the file
+while program_counter < len(file): # loop until we reach then end of the file
+  line = file[program_counter]
   data = line.split(" ")
   instruction = data.pop(0)
   data[-1] = data[-1].strip()
@@ -60,3 +64,4 @@ for line in file:
         variables[name] = True
       elif data[0] == "reboot":
         variables[name] = False
+  program_counter += 1 # increment the program counter
