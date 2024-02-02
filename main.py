@@ -13,7 +13,7 @@ while program_counter < len(file): # loop until we reach then end of the file
   data[-1] = data[-1].strip()
   match instruction:
     case "crank":#Print
-      if data[0] in variables.keys():
+      if data[0] in variables:
         #i tried to run my test program and found that 1 & 0 output true & false
         #i can also see that "if not x" also means "if x == False" so i changed "if not x" to "if x == None"
         if type(variables[data[0]]) in [bool,None]:
@@ -29,11 +29,11 @@ while program_counter < len(file): # loop until we reach then end of the file
         data = " ".join(data)
         print(data)
     case "pump":#Add
-      if data[0] in variables.keys():
+      if data[0] in variables:
         a = variables[data[0]]
       else:
         a = int(data[0])
-      if data[1] in variables.keys():
+      if data[1] in variables:
         b = variables[data[1]]
       else:
         b = int(data[1])
@@ -42,11 +42,11 @@ while program_counter < len(file): # loop until we reach then end of the file
       else:
         print(a+b)
     case "down":#Subtract
-      if data[0] in variables.keys():
+      if data[0] in variables:
         a = variables[data[0]]
       else:
         a = int(data[0])
-      if data[1] in variables.keys():
+      if data[1] in variables:
         b = variables[data[1]]
       else:
         b = int(data[1])
@@ -73,7 +73,7 @@ while program_counter < len(file): # loop until we reach then end of the file
       #we subtract 1 because we want to be able to reference the line number provided by our IDE, not the index
       #(IDE line numbers count from 1, while indexs count from 0, so we must decrement)
       #if data[0] is an existing var, and that var is a number, set the program counter to the number stored in the variable
-      if data[0] in variables.keys() and type(variables[data[0]]) == int:
+      if data[0] in variables and type(variables[data[0]]) == int:
         program_counter = variables[data[0]]-1 if not variables[data[0]]-1 < 0 else variables[data[0]]
         #inline if statement says that if the number-1 is less than 0 then just use the variable
         #this lets us use negative indexes and have 0 & 1 both represent the beginning of the program
