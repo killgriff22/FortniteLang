@@ -64,4 +64,12 @@ while program_counter < len(file): # loop until we reach then end of the file
         variables[name] = True
       elif data[0] == "reboot":
         variables[name] = False
+    case "jump":#jump
+      #only using the first argument, data[0] is the index to jump to
+      #if data[0] is an existing var, and that var is a number, set the program counter to the number stored in the variable
+      if data[0] in variables.keys() and type(variables[data[0]]) == int:
+        program_counter = variables[data[0]]
+      #otherwise, if its a number, then set the program counter to that number 
+      elif data[0].isdigit():
+        program_counter = int(data[0])
   program_counter += 1 # increment the program counter
