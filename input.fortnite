@@ -1,4 +1,4 @@
 res Areg 0
 crank Areg
 pump Areg 1 Areg
-jump 2
+cjump < 30 Areg 2

@@ -81,4 +81,41 @@ while program_counter < len(file): # loop until we reach then end of the file
       elif data[0].isdigit():
         program_counter = int(data[0])-1 if not int(data[0])-1 < 0 else int(data[0])
       continue #this should only be used to skip the increment that currently comes right after this line.
+    case "cjump":#conditional jump
+      #data[0] is something like <, >, ==, >=, !=, etc
+      jump=False
+      if data[1] in variables:
+        data[1] = variables[data[1]]
+      else:
+        data[1] = int(data[1])
+      if data[2] in variables:
+        data[2] = variables[data[2]]
+      else:
+        data[2] = int(data[2])
+      if data[3] in variables:
+        data[3] = variables[data[3]]
+      else:
+        data[3] = int(data[3])
+      match data[0]:
+        case "<":
+          if data[1] < data[2]:
+            jump=True
+        case ">":
+          if data[1] > data[2]:
+            jump=True
+        case "=":
+          if data[1] == data[2]:
+            jump=True
+        case "<=":
+          if data[1] <= data[2]:
+            jump=True
+        case ">=":
+          if data[1] >= data[2]:
+            jump=True
+        case "!=":
+          if not data[1] == data[2]:
+            jump=True
+      if jump:
+        program_counter = int(data[3])-1 if not int(data[3])-1 < 0 else int(data[3])
+      #if data[1] is meets the condition against data[2], then jump to data[3]
   program_counter += 1 # increment the program counter
